@@ -1,16 +1,29 @@
 import 'dart:io';
 
-void main(List<String> arguments) {
-  double saldoAtual = double.parse(stdin.readLineSync()!);
-  double valorDeposito = double.parse(stdin.readLineSync()!);
-  double valorRetirada = double.parse(stdin.readLineSync()!);
+void main() {
+  final scanner = stdin;
 
-  int calculaSaldo(
-      double saldoAtual, double valorDeposito, double valorRetirada) {
-    return (saldoAtual + valorDeposito - valorRetirada).toInt();
+  final entrada = scanner.readLineSync()!;
+  final partes = entrada.split(',');
+
+  // TODO: Solicitar ao usuário que forneça os valores necessários para criar uma Transacao.
+  var transacao =
+      Transacao(partes[0], partes[1], partes[2], double.parse(partes[3]));
+  transacao.imprimir();
+}
+
+class Transacao {
+  final String data;
+  final String hora;
+  final String descricao;
+  final double valor;
+
+  Transacao(this.data, this.hora, this.descricao, this.valor);
+
+  void imprimir() {
+    print(descricao);
+    print(data);
+    print(hora);
+    print(valor.toStringAsFixed(2));
   }
-
-  int saldoFinal = calculaSaldo(saldoAtual, valorDeposito, valorRetirada);
-
-  print("Saldo final: $saldoFinal");
 }
